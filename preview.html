@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palos Preserves — Chicago's Wild Side</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Primary Brand Colors */
+    --forest: #1b1325;
+    --forest-mid: #2a1d3a;
+    --forest-light: #3b2754;
+
+    /* Accent Greens */
+    --moss: #5d7c52;
+    --fern: #88b06a;
+
+    /* Highlight Colors */
+    --gold: #c8962a;
+    --gold-light: #e6bb55;
+
+    /* Supporting Neutrals */
+    --bark: #4a344f;
+    --cream: #f6f1f8;
+    --fog: #e8dfed;
+
+    /* Dark Backgrounds */
+    --night: #0c0714;
+    --star: #d9c8ff;
+    --sky: #24153d;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--forest);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ——— NAV ——— */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: linear-gradient(
+      to bottom,
+      rgba(12, 7, 20, 0.96) 0%,
+      rgba(12, 7, 20, 0.4) 60%,
+      transparent 100%
+    );
+    backdrop-filter: blur(2px);
+  }
+  
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--cream);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 165px;
+  }
+
+  .nav-logo-top {
+    font-size: 0.92rem;
+    letter-spacing: 0.34em;
+    width: 100%;
+    display: block;
+    line-height: 1;
+  }
+
+  .nav-logo-bottom {
+    font-size: 0.56rem;
+    letter-spacing: 0.52em;
+    width: 100%;
+    display: block;
+    line-height: 1.1;
+    margin-top: 0.22rem;
+    opacity: 0.88;
+  }
+
+  .nav-logo-leaf {
+    width: 28px;
+    height: 28px;
+    background: #5b3d82;
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(-45deg);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+
+  .nav-logo-leaf::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 10%;
+    width: 80%; height: 1px;
+    background: rgba(255,255,255,0.3);
+    transform: rotate(45deg);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(245,240,232,0.75);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--moss);
+    color: var(--cream) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: var(--forest-light); }
+
+  /* ——— HERO ——— */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 6rem;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(29,94,49,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 75% 20%, rgba(10,20,40,0.6) 0%, transparent 50%),
+      linear-gradient(160deg, #09050f 0%, #1b1325 45%, #2a1d3a 100%);
+  }
+  /* Silhouette forest layer */
+  .hero-trees {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background-image:
+      radial-gradient(ellipse 12px 80px at 8% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 18px 120px at 12% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 22px 160px at 17% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 14px 95px at 22% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 20px 140px at 28% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 16px 110px at 35% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 24px 170px at 41% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 12px 85px at 47% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 20px 130px at 53% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 16px 108px at 60% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 22px 155px at 67% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 14px 92px at 73% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 18px 120px at 79% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 24px 165px at 85% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 16px 100px at 91% 100%, #0c1a0c 49%, transparent 50%),
+      radial-gradient(ellipse 20px 135px at 96% 100%, #0c1a0c 49%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .star-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--d, 3s) var(--delay, 0s) infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: var(--op, 0.6); transform: scale(1); }
+    50% { opacity: 0.15; transform: scale(0.7); }
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--fern);
+  }
+  .hero-subtitle {
+    max-width: 500px;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.7);
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.9s forwards;
+  }
+  .btn-primary {
+    background: #5b3d82;
+    color: var(--cream);
+    border: none;
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #714ca5; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(245,240,232,0.35);
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--cream); background: rgba(245,240,232,0.07); }
+  .hero-stats {
+    position: absolute;
+    right: 3rem;
+    bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+  }
+  .hero-stat {
+    text-align: right;
+    border-right: 2px solid var(--moss);
+    padding-right: 1rem;
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.55);
+    margin-top: 0.3rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ——— SCROLL PROMPT ——— */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s forwards;
+  }
+  .scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+  .scroll-arrow {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, rgba(245,240,232,0.5), transparent);
+    animation: scrollPulse 1.8s infinite;
+  }
+  @keyframes scrollPulse {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ——— SECTION SHARED ——— */
+  section { position: relative; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  .section-body {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.75);
+  }
+
+  /* ——— INTRO BAND ——— */
+  .intro-band {
+    background: var(--cream);
+    color: var(--forest);
+    padding: 5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .intro-band .section-label { color: var(--moss); }
+  .intro-band .section-title { color: var(--forest); }
+  .intro-band .section-body { color: rgba(26,46,26,0.72); }
+  .intro-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .intro-feature {
+    border-left: 3px solid var(--moss);
+    padding-left: 1rem;
+  }
+  .intro-feature-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--forest);
+    margin-bottom: 0.25rem;
+  }
+  .intro-feature-text {
+    font-size: 0.82rem;
+    color: rgba(26,46,26,0.6);
+    line-height: 1.6;
+  }
+  .intro-right {
+    position: relative;
+  }
+  .intro-photo-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 200px 160px;
+    gap: 10px;
+  }
+  .photo-block {
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-block:first-child {
+    grid-row: 1 / 3;
+  }
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .photo-block:nth-child(1) .photo-placeholder {
+    background: linear-gradient(160deg, #2a4a2a 0%, #1a3020 100%);
+    color: rgba(200,240,200,0.6);
+  }
+  .photo-block:nth-child(2) .photo-placeholder {
+    background: linear-gradient(160deg, #3a5a2a 0%, #283820 100%);
+    color: rgba(200,240,180,0.5);
+  }
+  .photo-block:nth-child(3) .photo-placeholder {
+    background: linear-gradient(160deg, #1a2a3a 0%, #0d1820 100%);
+    color: rgba(180,200,240,0.5);
+  }
+
+  /* ——— ACTIVITIES ——— */
+  .activities {
+    background: var(--forest);
+    padding: 6rem 3rem;
+  }
+  .activities-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(255,255,255,0.06);
+  }
+  .activity-card {
+    background: var(--forest);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .activity-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .activity-card:hover::before { opacity: 1; }
+  .activity-card > * { position: relative; z-index: 1; }
+  .activity-icon {
+    width: 52px; height: 52px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .activity-icon svg { width: 100%; height: 100%; }
+  .activity-number {
+    position: absolute;
+    top: 2rem; right: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+  .activity-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--cream);
+  }
+  .activity-desc {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.62);
+  }
+  .activity-tag {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fern);
+    border: 1px solid rgba(122,170,74,0.35);
+    padding: 0.3rem 0.7rem;
+  }
+
+  /* ——— DARK SKY ——— */
+  .darksky {
+    background: var(--night);
+    padding: 7rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .darksky-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(20,30,70,0.8) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 30%, rgba(10,20,40,0.5) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .darksky-stars-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .darksky-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .darksky-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212,200,138,0.12);
+    border: 1px solid rgba(212,200,138,0.3);
+    padding: 0.4rem 1rem;
+    margin-bottom: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--star);
+  }
+  .darksky-badge-star {
+    width: 8px; height: 8px;
+    background: var(--star);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .darksky .section-title { color: var(--cream); }
+  .darksky .section-body {
+    color: rgba(245,240,232,0.65);
+    margin-top: 1.5rem;
+  }
+  .darksky-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .darksky-stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,200,138,0.15);
+    padding: 1.5rem;
+  }
+  .darksky-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--star);
+    line-height: 1;
+  }
+  .darksky-stat-label {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
+  .darksky-visual {
+    position: relative;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .night-circle {
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 35% 35%, #1a2a5a 0%, #0a0f1a 60%, #050810 100%);
+    border: 1px solid rgba(212,200,138,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .night-tree-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 35%;
+    background: #020504;
+    clip-path: polygon(0 60%, 3% 40%, 6% 55%, 9% 30%, 12% 50%, 16% 20%, 20% 45%, 24% 25%, 28% 50%, 32% 15%, 37% 40%, 41% 22%, 45% 48%, 50% 18%, 55% 42%, 59% 24%, 63% 50%, 67% 30%, 72% 45%, 76% 20%, 80% 42%, 84% 32%, 88% 50%, 92% 28%, 96% 45%, 100% 35%, 100% 100%, 0 100%);
+  }
+
+  /* ——— TRAILS ——— */
+  .trails {
+    background: #f3eff7;
+    color: var(--forest);
+    padding: 6rem 3rem;
+  }
+  .trails .section-label { color: var(--moss); }
+  .trails .section-title { color: var(--forest); }
+  .trails-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 5rem;
+    margin-top: 4rem;
+    align-items: start;
+  }
+  .trail-list { display: flex; flex-direction: column; gap: 0; }
+  .trail-item {
+    border-top: 1px solid rgba(26,46,26,0.12);
+    padding: 1.25rem 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .trail-item:last-child { border-bottom: 1px solid rgba(26,46,26,0.12); }
+  .trail-color {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .trail-info {}
+  .trail-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #1b1325;
+  }
+  .trail-meta {
+    font-size: 0.82rem;
+    color: rgba(27,19,37,0.72);
+    margin-top: 0.2rem;
+  }
+  .trail-difficulty {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+  .diff-easy { background: rgba(90,122,58,0.15); color: var(--moss); }
+  .diff-moderate { background: rgba(200,150,42,0.15); color: var(--gold); }
+  .diff-hard { background: rgba(150,60,30,0.15); color: #963c1e; }
+  /* Map placeholder */
+  .trail-map-area {
+    background: #d8d2e3;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 420px;
+    min-height: 260px;
+  }
+  .map-caption {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(26,46,26,0.6);
+    background: rgba(245,240,232,0.85);
+    padding: 0.4rem 0.75rem;
+  }
+  /* Stylized trail map SVG paths */
+  .trail-svg {
+    width: 100%; height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ——— EAT & DRINK ——— */
+  .eatdrink {
+    background: #1a1208;
+    padding: 6rem 3rem;
+  }
+  .eatdrink-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+  .eatdrink .section-body { color: rgba(245,240,232,0.65); margin-top: 1rem; }
+  .eatdrink-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(200,150,42,0.12);
+  }
+  .venue-card {
+    background: #1a1208;
+    padding: 2rem 1.75rem;
+    position: relative;
+    transition: background 0.25s;
+  }
+  .venue-card:hover { background: #221a0e; }
+  .venue-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .venue-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .venue-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.55);
+  }
+  .venue-dist {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.38);
+  }
+  .venue-dist-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ——— STAY ——— */
+  .stay {
+    background: var(--forest-mid);
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .stay-visual {
+    height: 460px;
+    background: linear-gradient(135deg, #1a3020 0%, #0d1e10 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cabin-illustration {
+    position: relative;
+    z-index: 2;
+  }
+  .stay-options { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+  .stay-option {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.25rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.2s;
+  }
+  .stay-option:hover { border-color: rgba(90,122,58,0.5); }
+  .stay-option-icon {
+    width: 48px; height: 48px;
+    background: rgba(90,122,58,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .stay-option-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+  .stay-option-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.58);
+    line-height: 1.65;
+  }
+  .stay-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-top: 0.5rem;
+  }
+
+  /* ——— EVENTS ——— */
+  .events {
+    background: var(--forest);
+    padding: 5rem 3rem;
+  }
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+  .event-card {
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .event-card:hover {
+    border-color: rgba(90,122,58,0.5);
+    transform: translateY(-2px);
+  }
+  .event-date-block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--moss);
+    padding: 0.5rem 0.85rem;
+    margin-bottom: 1.25rem;
+    min-width: 52px;
+  }
+  .event-date-month {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.75);
+    line-height: 1;
+  }
+  .event-date-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+  .event-desc {
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.58);
+    line-height: 1.7;
+  }
+  .event-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    background: rgba(212,200,138,0.1);
+    color: var(--star);
+    border: 1px solid rgba(212,200,138,0.2);
+  }
+
+  /* ——— PLAN CTA ——— */
+  .plan-cta {
+    background: var(--cream);
+    color: var(--forest);
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .plan-cta .section-label { color: var(--moss); }
+  .plan-cta .section-title { color: var(--forest); }
+  .plan-cta .section-body { color: rgba(26,46,26,0.65); margin-top: 1.25rem; }
+  .plan-cta .btn-primary { background: var(--forest); margin-top: 2rem; }
+  .plan-cta .btn-primary:hover { background: var(--forest-mid); }
+  .info-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .info-card {
+    background: var(--fog);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    border-left: 3px solid var(--moss);
+  }
+  .info-card-icon {
+    width: 36px; height: 36px;
+    background: rgba(90,122,58,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+  .info-card-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--forest);
+    margin-bottom: 0.2rem;
+  }
+  .info-card-text {
+    font-size: 0.8rem;
+    color: rgba(26,46,26,0.6);
+    line-height: 1.55;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    background: var(--night);
+    padding: 4rem 3rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .footer-tagline {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.45);
+    line-height: 1.65;
+    max-width: 280px;
+  }
+  .footer-col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-links a {
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 2rem;
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.3);
+  }
+  .footer-partner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .darksky-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(20,30,70,0.6);
+    border: 1px solid rgba(212,200,138,0.25);
+    padding: 0.2rem 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--star);
+  }
+  .darksky-pill-star {
+    width: 6px; height: 6px;
+    background: var(--star);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  /* bike rental highlight strip */
+  .rental-strip {
+    background: var(--moss);
+    padding: 1.75rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .rental-strip-text {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .rental-strip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .rental-strip-sub {
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.75);
+  }
+  .rental-items {
+    display: flex;
+    gap: 1rem;
+  }
+  .rental-item {
+    background: rgba(255,255,255,0.12);
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+  }
+
+
+
+  .trail-list,
+  .trail-item,
+  .trails-layout > div:first-child {
+    position: static !important;
+    top: auto !important;
+  }
+
+
+  @media (max-width: 900px) {
+    .trails-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .trail-map-area {
+      max-height: 300px;
+    }
+  }
+
+  /* Accessibility */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); border: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" aria-label="Palos Preserves Home">
+    <div class="nav-logo-leaf" aria-hidden="true"></div>
+
+    <div class="nav-logo-text">
+      <span class="nav-logo-top">PALOS</span>
+      <span class="nav-logo-bottom">PRESERVES</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#trails">Trails</a></li>
+    <li><a href="#darksky">Dark Sky</a></li>
+    <li><a href="#eat">Eat &amp; Drink</a></li>
+    <li><a href="#stay">Stay</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#plan" class="nav-cta">Plan Visit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" role="banner" aria-label="Hero banner">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-trees" aria-hidden="true"></div>
+  <div class="hero-stars" id="heroStars" aria-hidden="true"></div>
+
+  <div>
+    <p class="hero-eyebrow">15,000 acres · 30 minutes from Chicago</p>
+    <h1 class="hero-title">
+      Chicago's<br><em>wildest</em><br>escape.
+    </h1>
+    <p class="hero-subtitle">
+      50+ miles of trails. World-record dark skies. Hills you didn't know Illinois had. 
+      Welcome to the Palos Preserves — one unified wilderness, finally told as one story.
+    </p>
+    <div class="hero-actions">
+      <a href="#trails" class="btn-primary">Explore Trails</a>
+      <a href="#plan" class="btn-outline">Plan Your Visit</a>
+    </div>
+  </div>
+
+  <div class="hero-stats" aria-label="Key facts">
+    <div class="hero-stat">
+      <div class="hero-stat-num">15k</div>
+      <div class="hero-stat-label">Acres preserved</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">50+</div>
+      <div class="hero-stat-label">Miles of trails</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1000×</div>
+      <div class="hero-stat-label">Less light pollution</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Discover</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- INTRO BAND -->
+<section class="intro-band" aria-labelledby="intro-title">
+  <div>
+    <p class="section-label">One Preserve. One Vision.</p>
+    <h2 class="section-title" id="intro-title">More nature than you expected, closer than you think.</h2>
+    <p class="section-body" style="margin-top:1rem;">
+      The Palos Preserves stretch across southwest Cook County — a mosaic of hilly woods, peat bogs, glacial sloughs, and wetlands that together form the largest uninterrupted forested landscape in all of Cook County. It is, in every meaningful sense, a wilderness at your doorstep.
+    </p>
+    <div class="intro-features">
+      <div class="intro-feature">
+        <div class="intro-feature-title">Hiking &amp; Trail Running</div>
+        <div class="intro-feature-text">Winding unpaved paths through rolling terrain, rare for northeast Illinois</div>
+      </div>
+      <div class="intro-feature">
+        <div class="intro-feature-title">Mountain Biking</div>
+        <div class="intro-feature-text">~40 miles of singletrack for beginners to advanced riders</div>
+      </div>
+      <div class="intro-feature">
+        <div class="intro-feature-title">Paddling</div>
+        <div class="intro-feature-text">Kayak &amp; canoe rentals on Maple Lake, Saganashkee &amp; Tampier Sloughs</div>
+      </div>
+      <div class="intro-feature">
+        <div class="intro-feature-title">Year-Round Camping</div>
+        <div class="intro-feature-text">Cabins, tent sites &amp; RV hookups at Camp Bullfrog Lake</div>
+      </div>
+    </div>
+  </div>
+  <div class="intro-right">
+    <div class="intro-photo-grid" aria-hidden="true">
+      <div class="photo-block">
+        <div class="photo-placeholder" style="min-height:370px;">
+          <span>Saganashkee Slough at dawn</span>
+        </div>
+      </div>
+      <div class="photo-block">
+        <div class="photo-placeholder">
+          <span>Maple Lake trail</span>
+        </div>
+      </div>
+      <div class="photo-block">
+        <div class="photo-placeholder">
+          <span>Night sky · Palos</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.7rem;color:rgba(26,46,26,0.4);margin-top:0.5rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;">← Replace placeholders with licensed photography</p>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="activities" id="activities" aria-labelledby="act-title">
+  <div class="activities-header">
+    <div>
+      <p class="section-label">Things to Do</p>
+      <h2 class="section-title" id="act-title">Built for<br>every kind of<br>adventurer.</h2>
+    </div>
+    <a href="#trails" class="btn-outline" style="white-space:nowrap;">View Trail Maps →</a>
+  </div>
+  <div class="activities-grid" role="list">
+
+    <div class="activity-card" role="listitem">
+      <span class="activity-number" aria-hidden="true">01</span>
+      <div class="activity-icon" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 42 C14 30 18 24 26 20 C34 24 38 30 42 42" stroke="#7aaa4a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 42 L26 28 L32 42" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="26" cy="15" r="4" stroke="#7aaa4a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3 class="activity-title">Hiking &amp; Trail Running</h3>
+      <p class="activity-desc">Over 50 miles of unpaved trails wind through dense oak woodland, glacial ridges, and quiet prairie. Color-coded routes make it accessible to everyone from first-timers to serious trail runners.</p>
+      <span class="activity-tag">All skill levels</span>
+    </div>
+
+    <div class="activity-card" role="listitem">
+      <span class="activity-number" aria-hidden="true">02</span>
+      <div class="activity-icon" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="36" r="7" stroke="#7aaa4a" stroke-width="1.5"/>
+          <circle cx="36" cy="36" r="7" stroke="#7aaa4a" stroke-width="1.5"/>
+          <path d="M16 36 L22 18 L36 22 L36 36" stroke="#7aaa4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 18 L30 16" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="30" cy="14" r="2.5" stroke="#7aaa4a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3 class="activity-title">Mountain Biking</h3>
+      <p class="activity-desc">~40 miles of legal singletrack ranging from gentle rollers to technical descents. The trail network is one of the Chicago region's finest, with multiple staging areas and loop options to suit every ride.</p>
+      <span class="activity-tag">Novice to advanced</span>
+    </div>
+
+    <div class="activity-card" role="listitem">
+      <span class="activity-number" aria-hidden="true">03</span>
+      <div class="activity-icon" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 32 Q12 24 16 28 Q20 32 24 26 Q28 20 32 24 Q36 28 40 22 Q44 16 46 20" stroke="#7aaa4a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 40 L16 32 L22 38 L28 30" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+          <ellipse cx="26" cy="42" rx="18" ry="3" fill="rgba(122,170,74,0.12)"/>
+        </svg>
+      </div>
+      <h3 class="activity-title">Paddling</h3>
+      <p class="activity-desc">Three water bodies, three paddle experiences. Rent kayaks and canoes at Maple Lake or the REI boathouse at Saganashkee Slough. Quiet sloughs surrounded by forest — no motor traffic, no crowds.</p>
+      <span class="activity-tag">Rentals available</span>
+    </div>
+
+    <div class="activity-card" role="listitem">
+      <span class="activity-number" aria-hidden="true">04</span>
+      <div class="activity-icon" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 38 L18 24 L26 18 L34 24 L34 38 Z" stroke="#7aaa4a" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M22 38 L22 30 L30 30 L30 38" stroke="#5a7a3a" stroke-width="1.5"/>
+          <path d="M10 38 L42 38" stroke="#7aaa4a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M26 18 L26 14" stroke="#7aaa4a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="activity-title">Camping</h3>
+      <p class="activity-desc">Camp Bullfrog Lake offers year-round camping at the heart of the preserves — tent sites, RV hookups, heated cabins, and bunkhouses. Wake up steps from 50+ miles of trails. Free firewood included.</p>
+      <span class="activity-tag">Year-round · All weather</span>
+    </div>
+
+    <div class="activity-card" role="listitem">
+      <span class="activity-number" aria-hidden="true">05</span>
+      <div class="activity-icon" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="26" cy="26" r="3" fill="#d4c88a"/>
+          <line x1="26" y1="8" x2="26" y2="14" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="26" y1="38" x2="26" y2="44" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="8" y1="26" x2="14" y2="26" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="38" y1="26" x2="44" y2="26" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="14" y1="14" x2="18" y2="18" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="34" y1="34" x2="38" y2="38" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="38" y1="14" x2="34" y2="18" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="18" y1="34" x2="14" y2="38" stroke="#d4c88a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="activity-title">Stargazing</h3>
+      <p class="activity-desc">Designated the world's largest Urban Night Sky Place by the International Dark-Sky Association. Star parties, night walks, and special events run throughout the year — 4× more stars visible than Chicago.</p>
+      <span class="activity-tag">World record · IDA certified</span>
+    </div>
+
+    <div class="activity-card" role="listitem">
+      <span class="activity-number" aria-hidden="true">06</span>
+      <div class="activity-icon" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 36 C12 24 20 16 26 16 C32 16 40 24 40 36" stroke="#7aaa4a" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="26" cy="12" r="3" stroke="#7aaa4a" stroke-width="1.5"/>
+          <path d="M20 36 C22 28 24 26 26 26 C28 26 30 28 32 36" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="activity-title">Birding &amp; Wildlife</h3>
+      <p class="activity-desc">The preserve's diverse habitats — from peat bog to oak savanna — support exceptional biodiversity. Home to the Little Red Schoolhouse Nature Center and Cranberry Slough, one of Illinois' few remaining peat bogs.</p>
+      <span class="activity-tag">Year-round species</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- DARK SKY SECTION -->
+<section class="darksky" id="darksky" aria-labelledby="darksky-title">
+  <div class="darksky-bg" aria-hidden="true"></div>
+  <div class="darksky-stars-bg" id="darkskyStars" aria-hidden="true"></div>
+  <div class="darksky-content">
+    <div>
+      <div class="darksky-badge">
+        <div class="darksky-badge-star" aria-hidden="true"></div>
+        DarkSky International · Urban Night Sky Place
+      </div>
+      <p class="section-label">World Record</p>
+      <h2 class="section-title" id="darksky-title">The night sky Chicago forgot it had.</h2>
+      <p class="section-body">
+        In 2021, the Palos Preserves became the largest Urban Night Sky Place on Earth, certified by the International Dark-Sky Association in partnership with the Adler Planetarium. Satellite data confirms what visitors already feel: this forest is astonishingly, measurably dark.
+      </p>
+      <p class="section-body" style="margin-top:0.75rem;">
+        Teens from Adler's Far Horizons program used ISS data to document that Palos emits nearly 1,000 times less artificial light than downtown Chicago. Star parties, nighttime trail walks, and the Camp Bullfrog Lake campground put you under skies that few Chicagoans know exist.
+      </p>
+      <div class="darksky-stats">
+        <div class="darksky-stat">
+          <div class="darksky-stat-num">1,000×</div>
+          <div class="darksky-stat-label">Less light than downtown Chicago (satellite radiance data)</div>
+        </div>
+        <div class="darksky-stat">
+          <div class="darksky-stat-num">4×</div>
+          <div class="darksky-stat-label">More stars visible vs. the city skyline</div>
+        </div>
+        <div class="darksky-stat">
+          <div class="darksky-stat-num">#1</div>
+          <div class="darksky-stat-label">Largest Urban Night Sky Place in the world</div>
+        </div>
+        <div class="darksky-stat">
+          <div class="darksky-stat-num">6,662</div>
+          <div class="darksky-stat-label">Acres of certified dark-sky preserve</div>
+        </div>
+      </div>
+    </div>
+    <div class="darksky-visual" aria-hidden="true">
+      <div class="night-circle">
+        <div class="night-tree-line"></div>
+        <!-- Mini stars in circle -->
+        <div id="circleStars"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAILS -->
+<section class="trails" id="trails" aria-labelledby="trails-title">
+  <p class="section-label" style="color:var(--moss);">Trail System</p>
+  <h2 class="section-title" id="trails-title" style="color:var(--forest);">50+ miles. Infinite combinations.</h2>
+  <div class="trails-layout">
+    <div>
+      <p class="section-body" style="color:rgba(26,46,26,0.7);margin-bottom:2rem;">
+        The Palos trail network is color-coded and marked, with 43 parking locations and trail access from multiple communities. All trails are open to hikers, trail runners, and equestrians; most to mountain bikers. Multi-directional — explore however you like.
+      </p>
+      <nav class="trail-list" aria-label="Trail list">
+        <div class="trail-item">
+          <div class="trail-color" style="background:#d4882a;" aria-hidden="true"></div>
+          <div class="trail-info">
+            <div class="trail-name">Tan Unpaved Trail</div>
+            <div class="trail-meta">Country Lane Woods loop · Cranberry Slough</div>
+          </div>
+          <span class="trail-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="trail-item">
+          <div class="trail-color" style="background:#d4c82a;" aria-hidden="true"></div>
+          <div class="trail-info">
+            <div class="trail-name">Yellow Unpaved Trail</div>
+            <div class="trail-meta">Rolling woodland traverse · Peat bog access</div>
+          </div>
+          <span class="trail-difficulty diff-moderate">Moderate</span>
+        </div>
+        <div class="trail-item">
+          <div class="trail-color" style="background:#2a7ad4;" aria-hidden="true"></div>
+          <div class="trail-info">
+            <div class="trail-name">Blue Island Trail</div>
+            <div class="trail-meta">Bluff ridgelines · Slough overlooks</div>
+          </div>
+          <span class="trail-difficulty diff-moderate">Moderate</span>
+        </div>
+        <div class="trail-item">
+          <div class="trail-color" style="background:#c42a2a;" aria-hidden="true"></div>
+          <div class="trail-info">
+            <div class="trail-name">Red Singletrack</div>
+            <div class="trail-meta">Technical MTB · Fast descents · Advanced riders</div>
+          </div>
+          <span class="trail-difficulty diff-hard">Hard</span>
+        </div>
+        <div class="trail-item">
+          <div class="trail-color" style="background:#2ac47a;" aria-hidden="true"></div>
+          <div class="trail-info">
+            <div class="trail-name">John Husar I&amp;M Canal Trail</div>
+            <div class="trail-meta">5.5 mi · Longest in the system · Canal heritage route</div>
+          </div>
+          <span class="trail-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="trail-item">
+          <div class="trail-color" style="background:#7a2ac4;" aria-hidden="true"></div>
+          <div class="trail-info">
+            <div class="trail-name">Maple Lake MTB Loop</div>
+            <div class="trail-meta">40 mi unpaved network from Maple Lake staging area</div>
+          </div>
+          <span class="trail-difficulty diff-moderate">Moderate</span>
+        </div>
+      </nav>
+      <a href="https://fpdcc.com/places/trails/palos-trail-system/" target="_blank" rel="noopener" class="btn-primary" style="background:var(--forest);margin-top:2rem;display:inline-block;">Download Official Trail Map →</a>
+    </div>
+    <div>
+      <div class="trail-map-area" role="img" aria-label="Stylized trail network map of Palos Preserves">
+        <svg class="trail-svg" viewBox="0 0 560 480" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background forest texture -->
+          <rect width="560" height="480" fill="#c8d8b8"/>
+          <!-- Water bodies -->
+          <ellipse cx="160" cy="200" rx="55" ry="30" fill="#9ab8d4" opacity="0.8"/>
+          <text x="160" y="204" text-anchor="middle" font-size="8" font-family="DM Mono,monospace" fill="#3a5a7a" letter-spacing="1">Saganashkee</text>
+          <ellipse cx="300" cy="260" rx="40" ry="20" fill="#9ab8d4" opacity="0.8"/>
+          <text x="300" y="264" text-anchor="middle" font-size="8" font-family="DM Mono,monospace" fill="#3a5a7a" letter-spacing="1">Maple Lake</text>
+          <ellipse cx="420" cy="320" rx="38" ry="18" fill="#9ab8d4" opacity="0.8"/>
+          <text x="420" y="324" text-anchor="middle" font-size="8" font-family="DM Mono,monospace" fill="#3a5a7a" letter-spacing="1">Tampier Slough</text>
+          <!-- Tan trail -->
+          <path d="M60 140 Q90 120 130 130 Q170 140 200 120 Q240 100 280 130 Q310 150 350 140 Q390 130 430 150 Q460 165 480 155" stroke="#d4882a" stroke-width="2.5" fill="none" stroke-dasharray="none" stroke-linecap="round"/>
+          <!-- Yellow trail -->
+          <path d="M80 180 Q120 170 160 185 Q200 195 240 180 Q280 165 320 180 Q360 195 400 185 Q440 175 480 185" stroke="#c4b020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Blue trail -->
+          <path d="M60 230 Q100 215 150 230 Q190 242 230 228 Q270 215 310 230 Q355 245 400 235 Q440 225 480 238" stroke="#3a7ac4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Red singletrack (wiggly) -->
+          <path d="M80 290 Q100 280 115 292 Q130 302 148 290 Q165 278 182 292 Q200 305 220 292 Q240 279 258 293 Q275 305 295 292 Q315 279 335 293 Q355 305 375 292 Q395 278 415 292 Q432 303 450 292 Q465 282 480 290" stroke="#c42a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Green Canal trail -->
+          <path d="M60 350 L480 350" stroke="#2ab870" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <text x="270" y="344" text-anchor="middle" font-size="7.5" font-family="DM Mono,monospace" fill="#1a6040" letter-spacing="0.5">I&amp;M CANAL TRAIL (5.5 MI)</text>
+          <!-- MTB loops connectors -->
+          <path d="M300 260 Q290 230 300 200 Q310 170 300 140" stroke="#7a2ac4" stroke-width="1.5" fill="none" stroke-dasharray="4 3" stroke-linecap="round"/>
+          <path d="M300 260 Q330 280 360 270 Q390 260 400 235" stroke="#7a2ac4" stroke-width="1.5" fill="none" stroke-dasharray="4 3" stroke-linecap="round"/>
+          <!-- Parking markers -->
+          <g>
+            <circle cx="300" cy="260" r="8" fill="#ffffff" stroke="#2a4a2a" stroke-width="1.5"/>
+            <text x="300" y="264" text-anchor="middle" font-size="8" font-family="DM Sans,sans-serif" fill="#1a2e1a" font-weight="600">P</text>
+          </g>
+          <g>
+            <circle cx="160" cy="200" r="7" fill="#ffffff" stroke="#2a4a2a" stroke-width="1.5"/>
+            <text x="160" y="204" text-anchor="middle" font-size="7" font-family="DM Sans,sans-serif" fill="#1a2e1a" font-weight="600">P</text>
+          </g>
+          <!-- Camp Bullfrog label -->
+          <circle cx="300" cy="290" r="5" fill="#c8962a"/>
+          <text x="312" y="294" font-size="8.5" font-family="DM Sans,sans-serif" fill="#6b3a10" font-weight="600">Camp Bullfrog Lake</text>
+          <!-- North arrow -->
+          <g transform="translate(520,30)">
+            <line x1="0" y1="20" x2="0" y2="0" stroke="#2a4a2a" stroke-width="1.5"/>
+            <polygon points="0,0 -4,10 4,10" fill="#2a4a2a"/>
+            <text x="0" y="32" text-anchor="middle" font-size="9" font-family="DM Mono,monospace" fill="#2a4a2a">N</text>
+          </g>
+          <!-- Legend -->
+          <rect x="12" y="390" width="200" height="80" fill="rgba(245,240,232,0.88)" rx="2"/>
+          <line x1="20" y1="403" x2="40" y2="403" stroke="#d4882a" stroke-width="2.5"/><text x="46" y="407" font-size="8" font-family="DM Mono,monospace" fill="#3a2a10">Tan — Easy Hiking</text>
+          <line x1="20" y1="417" x2="40" y2="417" stroke="#c4b020" stroke-width="2.5"/><text x="46" y="421" font-size="8" font-family="DM Mono,monospace" fill="#3a2a10">Yellow — Moderate</text>
+          <line x1="20" y1="431" x2="40" y2="431" stroke="#3a7ac4" stroke-width="2.5"/><text x="46" y="435" font-size="8" font-family="DM Mono,monospace" fill="#3a2a10">Blue — Moderate</text>
+          <line x1="20" y1="445" x2="40" y2="445" stroke="#c42a2a" stroke-width="2"/><text x="46" y="449" font-size="8" font-family="DM Mono,monospace" fill="#3a2a10">Red — Hard MTB</text>
+          <line x1="20" y1="459" x2="40" y2="459" stroke="#2ab870" stroke-width="2.5"/><text x="46" y="463" font-size="8" font-family="DM Mono,monospace" fill="#3a2a10">Green — Canal Trail</text>
+          <!-- Label borders/towns -->
+          <text x="70" y="462" font-size="8" font-family="DM Mono,monospace" fill="rgba(26,46,26,0.45)" letter-spacing="0.8">WILLOW SPRINGS ←</text>
+          <text x="380" y="462" font-size="8" font-family="DM Mono,monospace" fill="rgba(26,46,26,0.45)" letter-spacing="0.8">→ LEMONT</text>
+        </svg>
+        <div class="map-caption">Illustrative map · Download official FPDCC map for navigation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIKE RENTAL STRIP -->
+<div class="rental-strip" role="complementary" aria-label="Bike rentals">
+  <div class="rental-strip-text">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="9" cy="22" r="5" stroke="white" stroke-width="1.5"/>
+      <circle cx="23" cy="22" r="5" stroke="white" stroke-width="1.5"/>
+      <path d="M9 22 L13 12 L23 15 L23 22" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 12 L18 10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="18" cy="9" r="1.5" stroke="white" stroke-width="1.2"/>
+    </svg>
+    <div>
+      <div class="rental-strip-title">Bikes &amp; Gear for Rent Nearby</div>
+      <div class="rental-strip-sub">Multiple local outfitters serve the Palos trail system</div>
+    </div>
+  </div>
+  <div class="rental-items">
+    <span class="rental-item">Richard's Bicycles · Palos Heights</span>
+    <span class="rental-item">2Bici Bike Shop · Willow Springs</span>
+    <span class="rental-item">REI Boathouse · Saganashkee Slough</span>
+  </div>
+  <a href="https://cambr.org/palos-forest-preserves/" target="_blank" rel="noopener" class="btn-outline" style="white-space:nowrap;border-color:rgba(255,255,255,0.5);">Rental Info →</a>
+</div>
+
+<!-- EAT & DRINK -->
+<section class="eatdrink" id="eat" aria-labelledby="eat-title">
+  <div class="eatdrink-header">
+    <div>
+      <p class="section-label">Fuel Up</p>
+      <h2 class="section-title" id="eat-title">Eat, drink, refuel.</h2>
+    </div>
+    <div>
+      <p class="section-body">
+        The communities ringing the Palos Preserves — Palos Park, Palos Hills, Lemont, Orland Park, Willow Springs — have a surprisingly diverse and local dining scene. From post-ride burgers to polished farm-to-table dinners, you'll find it close by.
+      </p>
+    </div>
+  </div>
+  <div class="eatdrink-grid" role="list">
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Pub · Post-hike classic</div>
+      <div class="venue-name">The Irish Legend</div>
+      <div class="venue-desc">A beloved local Irish pub on Archer Ave with hearty comfort food, cold pints, and a warm welcome for trail-weary visitors. Fish &amp; chips, stout, and live music nights.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Willow Springs · 0.5 mi from Maple Lake trailhead</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Italian · Local institution</div>
+      <div class="venue-name">Nino's Italian Beef</div>
+      <div class="venue-desc">Classic Chicago-style beef sandwiches and hot dogs right off Archer Ave. A quick, satisfying fuel stop before or after hitting the trails — cash-friendly, no-fuss, and delicious.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Willow Springs · Archer Ave corridor</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">New American · Upscale</div>
+      <div class="venue-name">Harvest Room</div>
+      <div class="venue-desc">A standout modern American restaurant near the preserves with creative seasonal dishes. Highly rated for Korean tacos with kimchi, blackened chicken, and hand-crafted cocktails.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Palos Hills · ~10 min drive</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Café · Crepes &amp; coffee</div>
+      <div class="venue-name">La Crepe Cafeccino</div>
+      <div class="venue-desc">A local gem in Palos Hills serving sweet and savory crepes alongside coffee drinks. Perfect for a light pre-trail breakfast or a relaxed post-adventure treat.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Palos Hills · 10 min drive</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Polish fusion · Unique</div>
+      <div class="venue-name">Tradycja Polish Fusion</div>
+      <div class="venue-desc">Creative Polish-American fusion cuisine with a homey, welcoming atmosphere. A genuinely different dining experience reflecting the area's strong Central European heritage.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Near Palos Park · ~15 min</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Outdoor dining · Scenic</div>
+      <div class="venue-name">Pierce Tavern</div>
+      <div class="venue-desc">Well-regarded tavern with outdoor seating and a scenic view. Popular for lunch after a morning hike, with a menu spanning salads, sandwiches, and American bar classics.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Palos Park area</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Seafood · Boil specialist</div>
+      <div class="venue-name">The Original Island Shrimp House</div>
+      <div class="venue-desc">A local favorite for Cajun-style seafood boils, shrimp, and crab. A fun, communal dining experience that's a step outside the expected southwest-suburbs fare.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Palos Hills area</div>
+    </div>
+
+    <div class="venue-card" role="listitem">
+      <div class="venue-type">Bar &amp; grill · Lemont gem</div>
+      <div class="venue-name">Lemont Downtown</div>
+      <div class="venue-desc">The charming historic downtown of Lemont sits 8 minutes from the eastern trailheads, with a growing collection of local bars, a full-bar golf experience, and riverside dining options.</div>
+      <div class="venue-dist"><div class="venue-dist-dot"></div>Lemont · 8 min from east trailheads</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STAY -->
+<section class="stay" id="stay" aria-labelledby="stay-title">
+  <div>
+    <p class="section-label">Where to Sleep</p>
+    <h2 class="section-title" id="stay-title">Stay in<br>the woods.</h2>
+    <p class="section-body" style="margin-top:1.25rem;">
+      Camp Bullfrog Lake is the only overnight option inside the preserves — and it's a remarkable one. Nestled at the heart of the trail system, it's the ideal base camp for a Palos weekend. Reservations available online through the Forest Preserves of Cook County.
+    </p>
+    <div class="stay-options">
+      <div class="stay-option">
+        <div class="stay-option-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polygon points="12,3 22,21 2,21" stroke="#7aaa4a" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="stay-option-title">Tent &amp; RV Campsites</div>
+          <div class="stay-option-desc">Primitive tent sites and electric RV hookups (30/50 amp) right at the water's edge. Free bundle of oak firewood with every reservation. Up to 6 people per site.</div>
+          <div class="stay-price">From $21/night (tent) · $27/night (RV electric)</div>
+        </div>
+      </div>
+      <div class="stay-option">
+        <div class="stay-option-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 21 L12 6 L21 21 Z" stroke="#7aaa4a" stroke-width="1.5" stroke-linejoin="round"/>
+            <line x1="8" y1="21" x2="8" y2="15" stroke="#7aaa4a" stroke-width="1.2"/>
+            <line x1="16" y1="21" x2="16" y2="15" stroke="#7aaa4a" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="stay-option-title">Cabins (Heated &amp; Standard)</div>
+          <div class="stay-option-desc">Small cabins (up to 8 people) and large cabins (up to 10), some winterized with private bathrooms. Perfect for family weekends or small group retreats.</div>
+          <div class="stay-price">From $42/night · Various configurations</div>
+        </div>
+      </div>
+      <div class="stay-option">
+        <div class="stay-option-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="8" width="18" height="13" rx="1" stroke="#7aaa4a" stroke-width="1.5"/>
+            <path d="M2 8 L12 3 L22 8" stroke="#7aaa4a" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="9" y1="21" x2="9" y2="14" stroke="#7aaa4a" stroke-width="1.2"/>
+            <line x1="15" y1="21" x2="15" y2="14" stroke="#7aaa4a" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="stay-option-title">Bunkhouses &amp; Group Sites</div>
+          <div class="stay-option-desc">Small bunkhouses (16 people) and large bunkhouses for youth groups, teams, and non-profit organizations. Veterans and non-profits receive 50% discounts Sun–Thu.</div>
+          <div class="stay-price">Group pricing available · 50% discount for nonprofits &amp; veterans</div>
+        </div>
+      </div>
+    </div>
+    <a href="https://fpdcc.com/places/locations/camp-bullfrog-lake/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:2rem;display:inline-block;">Reserve at Camp Bullfrog Lake →</a>
+  </div>
+  <div class="stay-visual" aria-hidden="true">
+    <!-- Stylized night camp illustration -->
+    <svg width="300" height="360" viewBox="0 0 300 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Stars -->
+      <circle cx="50" cy="30" r="1.5" fill="#d4c88a" opacity="0.8"/>
+      <circle cx="120" cy="20" r="1" fill="#d4c88a" opacity="0.6"/>
+      <circle cx="200" cy="35" r="1.5" fill="#d4c88a" opacity="0.9"/>
+      <circle cx="250" cy="15" r="1" fill="#d4c88a" opacity="0.7"/>
+      <circle cx="270" cy="50" r="1.5" fill="#d4c88a" opacity="0.5"/>
+      <circle cx="80" cy="60" r="1" fill="#d4c88a" opacity="0.7"/>
+      <circle cx="160" cy="45" r="1" fill="#d4c88a" opacity="0.8"/>
+      <!-- Moon -->
+      <circle cx="240" cy="55" r="18" fill="#1a2a5a"/>
+      <circle cx="246" cy="50" r="15" fill="#1a2e1a"/>
+      <!-- Trees silhouette -->
+      <polygon points="20,200 35,150 50,200" fill="#0d1e10"/>
+      <polygon points="40,210 58,145 76,210" fill="#0d1e10"/>
+      <polygon points="65,205 85,135 105,205" fill="#0d1e10"/>
+      <polygon points="210,200 230,140 250,200" fill="#0d1e10"/>
+      <polygon points="240,210 260,148 280,210" fill="#0d1e10"/>
+      <polygon points="270,205 285,155 300,205" fill="#0d1e10"/>
+      <!-- Ground -->
+      <rect x="0" y="200" width="300" height="160" fill="#0a1408"/>
+      <!-- Water -->
+      <ellipse cx="150" cy="280" rx="90" ry="25" fill="#1a2a3a" opacity="0.8"/>
+      <!-- Water reflection -->
+      <ellipse cx="150" cy="285" rx="70" ry="10" fill="#1e3050" opacity="0.5"/>
+      <!-- Cabin -->
+      <rect x="105" y="210" width="90" height="60" fill="#1a2e1a" stroke="#2d4a2d" stroke-width="1"/>
+      <polygon points="100,210 150,175 200,210" fill="#162414" stroke="#2d4a2d" stroke-width="1"/>
+      <!-- Cabin window glow -->
+      <rect x="118" y="225" width="20" height="18" fill="#c8962a" opacity="0.7" rx="1"/>
+      <rect x="162" y="225" width="20" height="18" fill="#c8962a" opacity="0.6" rx="1"/>
+      <!-- Cabin door -->
+      <rect x="138" y="245" width="24" height="25" fill="#0d1a0d" rx="1"/>
+      <!-- Fire -->
+      <ellipse cx="150" cy="198" rx="8" ry="3" fill="#c8962a" opacity="0.5"/>
+      <path d="M144 198 Q147 188 150 184 Q153 188 156 198" fill="#e8882a" opacity="0.8"/>
+      <path d="M146 198 Q149 192 150 188 Q151 192 154 198" fill="#f8c84a" opacity="0.9"/>
+      <!-- Campfire logs -->
+      <line x1="140" y1="200" x2="160" y2="200" stroke="#6b3a10" stroke-width="3" stroke-linecap="round"/>
+      <line x1="143" y1="202" x2="157" y2="202" stroke="#5a3010" stroke-width="2" stroke-linecap="round"/>
+      <!-- Fire glow on ground -->
+      <ellipse cx="150" cy="202" rx="18" ry="5" fill="#c8602a" opacity="0.15"/>
+    </svg>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events" aria-labelledby="events-title">
+  <p class="section-label">Upcoming Events</p>
+  <h2 class="section-title" id="events-title">There's always something happening.</h2>
+  <div class="events-grid" role="list">
+    <div class="event-card" role="listitem">
+      <div class="event-date-block" aria-label="June 14">
+        <span class="event-date-month">Jun</span>
+        <span class="event-date-day">14</span>
+      </div>
+      <h3 class="event-title">Star Party at Maple Lake</h3>
+      <p class="event-desc">Join Adler Planetarium astronomers for an evening of constellation tours, telescope viewing, and family-friendly activities. Refreshments provided. Gates stay open for registered attendees.</p>
+      <span class="event-tag">Dark sky · Family</span>
+    </div>
+    <div class="event-card" role="listitem">
+      <div class="event-date-block" aria-label="June 21">
+        <span class="event-date-month">Jun</span>
+        <span class="event-date-day">21</span>
+      </div>
+      <h3 class="event-title">Summer Solstice Trail Run</h3>
+      <p class="event-desc">Celebrate the longest day with a guided 10-mile trail run through the Palos hills. Experienced trail leaders, multiple pace groups, and a gathering at the finish. All skill levels welcome.</p>
+      <span class="event-tag">Fitness · Community</span>
+    </div>
+    <div class="event-card" role="listitem">
+      <div class="event-date-block" aria-label="July 4">
+        <span class="event-date-month">Jul</span>
+        <span class="event-date-day">4</span>
+      </div>
+      <h3 class="event-title">Independence Day Nature Walk</h3>
+      <p class="event-desc">A naturalist-led morning hike through Cranberry Slough and Country Lane Woods. Learn about native flora and Illinois' rare peat bog ecosystems before the holiday crowds emerge.</p>
+      <span class="event-tag">Nature · Education</span>
+    </div>
+    <div class="event-card" role="listitem">
+      <div class="event-date-block" aria-label="July 19">
+        <span class="event-date-month">Jul</span>
+        <span class="event-date-day">19</span>
+      </div>
+      <h3 class="event-title">MTB Skills Clinic</h3>
+      <p class="event-desc">CAMBR-hosted beginner-to-intermediate mountain bike skills session at the Maple Lake staging area. Learn trail etiquette, body positioning, and how to read Palos singletrack.</p>
+      <span class="event-tag">Biking · Skills</span>
+    </div>
+    <div class="event-card" role="listitem">
+      <div class="event-date-block" aria-label="August 2">
+        <span class="event-date-month">Aug</span>
+        <span class="event-date-day">2</span>
+      </div>
+      <h3 class="event-title">Nighttime Star Walk</h3>
+      <p class="event-desc">A guided night hike under Palos' world-record dark skies. Learn to navigate by stars, identify the Milky Way, and understand why Palos earned its IDA designation.</p>
+      <span class="event-tag">Dark sky · Hiking</span>
+    </div>
+    <div class="event-card" role="listitem">
+      <div class="event-date-block" aria-label="August 23">
+        <span class="event-date-month">Aug</span>
+        <span class="event-date-day">23</span>
+      </div>
+      <h3 class="event-title">Paddlefest at Saganashkee Slough</h3>
+      <p class="event-desc">A full day of free kayak and canoe demos at the REI boathouse. First-time paddlers welcome — gear and instruction provided. Evening guided paddle for registered participants.</p>
+      <span class="event-tag">Paddling · Free</span>
+    </div>
+  </div>
+  <p style="margin-top:2.5rem;font-size:0.82rem;color:rgba(245,240,232,0.45);font-style:italic;">* Sample events shown for illustration. Check the Forest Preserves of Cook County event calendar for current listings.</p>
+</section>
+
+<!-- PLAN CTA -->
+<section class="plan-cta" id="plan" aria-labelledby="plan-title">
+  <div>
+    <p class="section-label">Plan Your Visit</p>
+    <h2 class="section-title" id="plan-title">Everything you need to get out here.</h2>
+    <p class="section-body">
+      Palos Preserves is free to visit and open year-round. Most trailheads have free parking and are accessible from multiple surrounding communities. The preserves close at sunset — except for registered campers at Camp Bullfrog Lake and special events.
+    </p>
+    <a href="https://fpdcc.com/places/locations/" target="_blank" rel="noopener" class="btn-primary">Visit the Official Preserves Site →</a>
+  </div>
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-card-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="7.5" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M9 5 L9 9 L12 11" stroke="#5a7a3a" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-card-title">Hours</div>
+        <div class="info-card-text">Open sunrise to sunset daily. Registered campers have 24-hour access. Staff on-site 8am–4pm at Camp Bullfrog Lake.</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 2 C6 2 3 5 3 8 C3 12 9 16 9 16 C9 16 15 12 15 8 C15 5 12 2 9 2Z" stroke="#5a7a3a" stroke-width="1.2"/>
+          <circle cx="9" cy="8" r="2" stroke="#5a7a3a" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-card-title">Getting Here</div>
+        <div class="info-card-text">~30 min southwest of Chicago. 43 parking locations throughout the system. Limited Metra access via Heritage Line. No admission fee.</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="4" width="14" height="11" rx="1" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M2 8 L16 8" stroke="#5a7a3a" stroke-width="1.2"/>
+          <path d="M6 2 L6 5" stroke="#5a7a3a" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 2 L12 5" stroke="#5a7a3a" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-card-title">Camping Reservations</div>
+        <div class="info-card-text">Book at fpdcc.com or call the campground. Must be 18+ to reserve, 21+ for cabins. Reservations less than 48 hours out must be by phone.</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M3 14 Q6 10 9 11 Q12 12 15 8" stroke="#5a7a3a" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="9" cy="6" r="3" stroke="#5a7a3a" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-card-title">Trail Conditions</div>
+        <div class="info-card-text">Check Trailforks.com or CAMBR.org before riding. Wet trails close to bikes — if you leave a footprint, turn around. Orange markers = closed trail.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">
+        <div class="nav-logo-leaf" aria-hidden="true" style="width:24px;height:24px;"></div>
+        <span class="footer-brand-name">Palos Preserves</span>
+      </div>
+      <p class="footer-tagline">15,000 acres of hills, woods, waterways, and night sky in Chicago's backyard. One preserve. One unified destination.</p>
+      <div style="margin-top:1.5rem;">
+        <span class="darksky-pill">
+          <div class="darksky-pill-star" aria-hidden="true"></div>
+          IDA Urban Night Sky Place
+        </span>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="#trails">Trail Maps</a></li>
+        <li><a href="#darksky">Dark Sky Program</a></li>
+        <li><a href="#eat">Eat &amp; Drink</a></li>
+        <li><a href="#stay">Camping &amp; Stays</a></li>
+        <li><a href="#events">Events Calendar</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Activities</div>
+      <ul class="footer-links">
+        <li><a href="#activities">Hiking</a></li>
+        <li><a href="#activities">Mountain Biking</a></li>
+        <li><a href="#activities">Paddling</a></li>
+        <li><a href="#activities">Stargazing</a></li>
+        <li><a href="#activities">Birding</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Resources</div>
+      <ul class="footer-links">
+        <li><a href="https://fpdcc.com" target="_blank" rel="noopener">Forest Preserves of Cook County</a></li>
+        <li><a href="https://cambr.org/palos-forest-preserves/" target="_blank" rel="noopener">CAMBR Trail Org</a></li>
+        <li><a href="https://darksky.org/places/palos-preserves-urban-night-sky-place/" target="_blank" rel="noopener">DarkSky International</a></li>
+        <li><a href="https://www.adlerplanetarium.org" target="_blank" rel="noopener">Adler Planetarium</a></li>
+        <li><a href="https://www.trailforks.com/region/palos-forest-preserve-1478796860/" target="_blank" rel="noopener">Trail Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Palos Preserves Tourism Initiative · A pro bono consulting project · Not affiliated with FPDCC</span>
+    <span>Southwest Cook County, Illinois</span>
+  </div>
+</footer>
+
+<script>
+  // Generate hero stars
+  const heroStars = document.getElementById('heroStars');
+  for (let i = 0; i < 120; i++) {
+    const star = document.createElement('div');
+    star.className = 'star-dot';
+    const size = Math.random() < 0.15 ? 2 : 1;
+    star.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random() * 65}%;
+      left:${Math.random() * 100}%;
+      --op:${0.3 + Math.random() * 0.7};
+      --d:${2 + Math.random() * 4}s;
+      --delay:-${Math.random() * 4}s;
+    `;
+    heroStars.appendChild(star);
+  }
+
+  // Generate dark sky section stars
+  const dsStars = document.getElementById('darkskyStars');
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement('div');
+    star.className = 'star-dot';
+    const size = Math.random() < 0.08 ? 2 : 1;
+    star.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random() * 100}%;
+      left:${Math.random() * 100}%;
+      --op:${0.2 + Math.random() * 0.6};
+      --d:${3 + Math.random() * 5}s;
+      --delay:-${Math.random() * 5}s;
+    `;
+    dsStars.appendChild(star);
+  }
+
+  // Stars inside the night circle illustration
+  const circle = document.getElementById('circleStars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    const angle = Math.random() * 2 * Math.PI;
+    const radius = Math.random() * 145;
+    const cx = 170 + Math.cos(angle) * radius;
+    const cy = 170 + Math.sin(angle) * radius;
+    if (cy > 220) continue;
+    const sz = Math.random() < 0.1 ? 2 : 1;
+    s.style.cssText = `
+      position:absolute;
+      width:${sz}px; height:${sz}px;
+      border-radius:50%;
+      background:white;
+      top:${cy}px; left:${cx}px;
+      opacity:${0.4 + Math.random() * 0.6};
+      animation: twinkle ${2+Math.random()*4}s ${-Math.random()*4}s infinite;
+      --op:${0.4+Math.random()*0.6};
+    `;
+    circle.appendChild(s);
+  }
+
+  // Smooth scroll for nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Sticky nav opacity on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 80;
+    nav.style.background = scrolled
+      ? 'rgba(10,15,10,0.97)'
+      : 'linear-gradient(to bottom, rgba(10,15,10,0.95) 0%, transparent 100%)';
+  });
+</script>
+</body>
+</html>
